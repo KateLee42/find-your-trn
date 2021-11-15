@@ -1,5 +1,5 @@
 {
-  "name": "Your service name",
+  "name": "Find your Teacher Reference Number (TRN)",
   "env": {
     "USE_AUTH": {
       "description": "Enable or disable password protection on production.",

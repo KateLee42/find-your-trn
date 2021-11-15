@@ -1,7 +1,7 @@
 import express from 'express'
 import validator from 'express-validator'
 import { exampleValidation } from './validations.js'
-import { exampleWizardPaths, exampleWizardForks} from './wizards.js'
+import { exampleWizardPaths, exampleWizardForks, trnWizardPaths, trnWizardForks} from './wizards.js'
 
 const router = express.Router()
 
@@ -33,6 +33,28 @@ router.get('/examples/wizard/:view', (req, res) => {
 router.post('/examples/wizard/:view?', (req, res) => {
   const fork = exampleWizardForks(req)
   const paths = exampleWizardPaths(req)
+  fork ? res.redirect(fork) : res.redirect(paths.next)
+})
+
+
+/**
+ * TRN wizard routes
+ */
+router.get('/wizard', (req, res) => {
+  res.render('wizard/index', {
+    paths: trnWizardPaths(req)
+  })
+})
+
+router.get('/wizard/:view', (req, res) => {
+  res.render(`wizard/${req.params.view}`, {
+    paths: trnWizardPaths(req)
+  })
+})
+
+router.post('/wizard/:view?', (req, res) => {
+  const fork = trnWizardForks(req)
+  const paths = trnWizardPaths(req)
   fork ? res.redirect(fork) : res.redirect(paths.next)
 })
 
