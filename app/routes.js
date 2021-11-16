@@ -40,19 +40,19 @@ router.post('/examples/wizard/:view?', (req, res) => {
 /**
  * TRN wizard routes
  */
-router.get('/start', (req, res) => {
-  res.render('start', {
+router.get('/wizard', (req, res) => {
+  res.render('wizard/index', {
     paths: trnWizardPaths(req)
   })
 })
 
-router.get('/:view', (req, res) => {
-  res.render(req.params.view, {
+router.get('/wizard/:view', (req, res) => {
+  res.render(`wizard/${req.params.view}`, {
     paths: trnWizardPaths(req)
   })
 })
 
-router.post('/:view?', (req, res) => {
+router.post('/wizard/:view?', (req, res) => {
   const fork = trnWizardForks(req)
   const paths = trnWizardPaths(req)
   fork ? res.redirect(fork) : res.redirect(paths.next)
