@@ -1,74 +1,41 @@
 {% extends "layouts/default.njk" %}
 
-{% set title = "Find your TRN" %}
+{% set title = "Find your Teacher Reference Number (TRN)" %}
+
+{% block header %}
+  {{ govukHeader({
+    homepageUrl: "/",
+    serviceUrl: "/",
+    containerClasses: "govuk-width-container"
+  }) }}
+
+  <div class="app-masthead">
+    <div class="govuk-width-container">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          <h1 class="app-masthead__title govuk-heading-xl govuk-!-margin-bottom-3">
+            {{ title }}
+          </h1>
+          <h3 class="app-masthead__subtitle govuk-heading-l">Prototype</h3>
+        </div>
+        <div class="govuk-grid-column-one-third">
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block beforeContent %}
+{% endblock %}
 
 {% block content %}
-  {{ govukNotificationBanner({
-    text: "You have switched on the demonstration feature flag. Return to the <a class=\"govuk-notification-banner__link\" href=\"/feature-flags\">feature flags</a> page to turn it off." | safe
-  }) if data.features.demo.on }}
-
-  <h1 class="govuk-heading-xl">{{ title }}</h1>
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <p>The rig contains all you need to prototype anything from simple static pages to complex, data-driven transactions.</p>
-
-      <h2 class="govuk-heading-m">About this page</h2>
-      <p>We recommend you add links to your prototype to this page, rather than delete it. You’ll find this page in <code class="rig-code rig-code--inline">/app/views/index.njk</code>.</p>
-      <p>You can change the service name by changing the <code class="rig-code rig-code--inline">name</code> value in <code class="rig-code rig-code--inline">app.json</code>.</p>
-
-      <h2 class="govuk-heading-m">Documentation</h2>
-      <p>The rig includes a number of utilities to help build your prototype. To learn how these work, navigate to <a href="/docs"><code class="rig-code rig-code--inline">/docs</code></a>, or visit the <a href="https://govuk-prototype-rig.herokuapp.com">GOV.UK Prototype Rig website</a>.</p>
-    </div>
-
-    <div class="govuk-grid-column-one-third">
-      {{ rigRelatedNavigation({
-        sections: [{
-          title: "Examples",
-          subsections: [{
-            title: "Help users to…",
-            items: [{
-              text: "Check answers",
-              href: "/examples/check-answers"
-            }, {
-              text: "Recover from validation errors",
-              href: "/examples/validation-errors"
-            }, {
-              text: "Select from a long list of options",
-              href: "/examples/autocomplete"
-            }, {
-              text: "Perform an action on a summary",
-              href: "/examples/summary-cards"
-            }]
-          }, {
-            title: "Pages",
-            items: [{
-              text: "Confirmation page",
-              href: "/examples/confirmation"
-            }, {
-              text: "Content page",
-              href: "/examples/content"
-            }, {
-              text: "Question page",
-              href: "/examples/question"
-            }, {
-              text: "Start page on GOV.UK",
-              href: "/examples/start"
-            }, {
-              text: "Task list page",
-              href: "/examples/task-list"
-            }, {
-              text: "Find your TRN service",
-              href: "/start"
-            }]
-          }, {
-            title: "Wizards",
-            items: [{
-              text: "Example user journey",
-              href: "/examples/wizard"
-            }]
-          }]
-        }]
+      {{ govukButton({
+        text: 'View prototype',
+        href: '/start',
+        isStartButton: true
       }) }}
     </div>
   </div>
