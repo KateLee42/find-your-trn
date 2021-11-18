@@ -39,6 +39,8 @@ export function trnWizardPaths (req) {
     '/name',
     '/dob',
     '/ni-number',
+    '/itt-provider',
+    '/check-answers',
     '/your-trn-is',
     '/'
   ]
@@ -51,13 +53,17 @@ export function trnWizardForks (req) {
   const forks = [{
     currentPath: '/trn-holder',
     storedData: ['wizard', 'do-you-have-a-trn'],
-    excludedValues: ["No, I'm not sure if I have a TRN"],
+    excludedValues: ['dont-know'],
     forkPath: '/email'
   },{
     currentPath: '/trn-conditions',
     storedData: ['wizard','trn-conditions'],
     values: ["none"],
     forkPath: '/you-dont-have-a-trn'
+  },{
+    currentPath: '/ni-number',
+    excludedValues: ['dont-know'],
+    forkPath: (value) => { return '/your-trn-is' }
   }]
   return wizard.nextForkPath(forks, req)
 }
