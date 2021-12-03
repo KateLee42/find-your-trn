@@ -1,6 +1,6 @@
 {% extends "layouts/default.njk" %}
 
-{% set title = "Find your TRN" %}
+{% set title = "Find out your TRN" %}
 
 {% block pageNavigation %}
   {{ govukBackLink({
@@ -12,18 +12,18 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <form method="post" novalidate>
-        {{ govukInput({
+        {{ govukInput(decorate({
           label: {
-            text: "Email address",
+            text: "Your email address",
             classes: "govuk-label--xl",
             isPageHeading: true
             },
             hint: {
-              text: "We’ll email you a link to confirm your email address. This doesn’t have to be the same email address that you had when your TRN was issued."
+              text: "We will use your email address to help find your TRN and to send it to you."
             },
             id: "email-address",
             name: "email-address"
-          }) }}
+          }, ['email-address'])) }}
 
         {{ govukButton({
           text: "Continue"

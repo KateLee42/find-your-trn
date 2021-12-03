@@ -32,17 +32,16 @@ export function trnWizardPaths (req) {
   const paths = [
     '/start',
     '/trn-holder',
-    '/trn-conditions',
-    '/you-have-a-trn',
     '/email',
-    '/check-your-email',
     '/name',
     '/dob',
     '/ni-number',
+    '/previous-last-name',
     '/itt-provider',
-    '/check-answers',
+    '/submit-request',
     '/helpdesk-request-submitted',
-    '/your-trn-is',
+    '/check-answers',
+    '/trn-sent',
     '/'
   ]
 
@@ -70,7 +69,7 @@ const ninoMatchesDQTRecord = (data) => {
 }
 
 const ittProviderMatchesDQTRecord = (data) => {
-  return (data['former-itt-provider'] || data['current-itt-provider']) === data['dqt_record']['itt-provider']
+  return (data['itt-provider']) === data['dqt_record']['itt-provider']
 }
 
 const numberOfMatchingFieldsAgainstDQTRecord = (data) => {
@@ -91,19 +90,14 @@ export function trnWizardForks (req) {
   const forks = [{
     currentPath: '/trn-holder',
     storedData: ['wizard', 'do-you-have-a-trn'],
-    excludedValues: ['dont-know'],
-    forkPath: '/email'
-  },{
-    currentPath: '/trn-conditions',
-    storedData: ['wizard','trn-conditions'],
-    values: ["none"],
+    excludedValues: ['yes'],
     forkPath: '/you-dont-have-a-trn'
   },{
     currentPath: '/ni-number',
     excludedValues: [],
     forkPath: (value) => {
       if (userMatchesDQTRecord(req.session.data)) {
-        return '/your-trn-is'
+        return '/check-answers'
       } else {
         return '/itt-provider'
       }
@@ -113,9 +107,9 @@ export function trnWizardForks (req) {
     excludedValues: [],
     forkPath: (value) => {
       if (userMatchesDQTRecord(req.session.data)) {
-        return '/your-trn-is'
-      } else {
         return '/check-answers'
+      } else {
+        return '/submit-request'
       }
     }
   }]

@@ -11,12 +11,9 @@
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds-from-desktop">
-      <h1 class="govuk-heading-xl">Check your answers</h1>
-        {% set trnGuidance %}
-We will send your TRN to the email address you have provided.
-        {% endset %}
-
-        {{ trnGuidance | govukMarkdown | safe }}
+      <h1 class="govuk-heading-xl">TRN could not be found</h1>
+      <p>We could not find your TRN in the Teaching Regulation Agency records using the details you provided.</p>
+      <p>You can send a request to the Teaching Regulation Agency instead using the details below.</p>
       {{ govukSummaryList({
         classes: "govuk-!-margin-bottom-9",
         rows: [{
@@ -47,7 +44,7 @@ We will send your TRN to the email address you have provided.
               href: "/name"
             }]
           }
-        }if data['first-name'], {
+        }, {
           key: {
             text: "Date of birth"
           },
@@ -61,7 +58,7 @@ We will send your TRN to the email address you have provided.
               href: "/dob"
             }]
           }
-        }if data['date-of-birth'], {
+        }, {
           key: {
             text: "National Insurance number"
           },
@@ -75,7 +72,7 @@ We will send your TRN to the email address you have provided.
               href: "/ni-number"
             }]
           }
-        }if data['national-insurance-number'], {
+        }, {
           key: {
             text: "Teacher training provider"
           },
@@ -92,11 +89,13 @@ We will send your TRN to the email address you have provided.
         } if data['itt-provider']
       ]}) }}
 
+      <p>You will receive a response via email within 5 working days.</p>
+
       <form method="post" novalidate>
         <input type="hidden" name="answers-checked" value="true">
 
         {{ govukButton({
-          text: "Submit"
+          text: "Request TRN"
         }) }}
       </form>
     </div>

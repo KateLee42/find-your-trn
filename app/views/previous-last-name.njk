@@ -9,13 +9,13 @@
 {% endblock %}
 
 {% block content %}
-  {% set ITTProviderNameHtml %}
+  {% set PreviousLastNameHtml %}
     {{ govukInput({
       label: {
-        text: "Your school, university or other training provider"
+        text: "Previous last name"
       },
-      id: "itt-provider",
-      name: "itt-provider"
+      id: "previous-last-name",
+      name: "previous-last-name"
     }) }}
   {% endset %}
 
@@ -27,21 +27,20 @@
             legend: {
               classes: "govuk-fieldset__legend--xl",
               isPageHeading: true,
-              text: 'Have you ever been enrolled in a teacher training course in England or Wales?'
+              text: 'Have you changed your last name?'
             }
           },
           items: [
             {
               text: "Yes",
               value: 'yes',
-              conditional: { html: ITTProviderNameHtml }
+              conditional: { html: PreviousLastNameHtml }
             },
             {
               text: "No",
               value: 'no'
             }]
-        }, ["wizard", "has-done-itt"])) }}
-
+        }, ["wizard", "previous-last-name"])) }}
         {{ govukButton({
           text: "Continue"
         }) }}
